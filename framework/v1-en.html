@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventive Structure Philosophy – Judgment Criteria Framework</title>
+    <style>
+        :root {
+            --clr-primary: #264653;      /* Deep blue-green – calmness and reason */
+            --clr-accent: #2a9d8f;       /* Emerald – practical action */
+            --clr-warning: #e76f51;      /* Sunset orange – warning */
+            --clr-neutral: #f1faee;      /* Very light ivory – safe margin */
+            --radius-lg: 18px;
+            --shadow-md: 0 18px 36px rgba(0,0,0,0.12);
+            --font-head: 'Segoe UI', 'Noto Sans', system-ui, sans-serif;
+            --font-body: 'Noto Sans', system-ui, sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #83c5be 0%, #edf6f9 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 24px;
+            color: #2c3e50;
+        }
+
+        /* ---------- Start Screen ---------- */
+        .start-screen {
+            background: white;
+            width: 100%;
+            max-width: 820px;
+            padding: 56px 48px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        .start-screen h1 {
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 2.4rem;
+            color: var(--clr-primary);
+            margin-bottom: 16px;
+        }
+        .start-screen p {
+            font-size: 1.1rem;
+            line-height: 1.75;
+            color: #444;
+            margin-bottom: 32px;
+        }
+        .btn-main {
+            display: inline-block;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, var(--clr-accent) 0%, #21867a 100%);
+            border: none;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.15);
+        }
+
+        /* ---------- Main App ---------- */
+        .container {
+            display: none;
+            width: 100%;
+            max-width: 820px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            min-height: 80vh;
+        }
+        .header {
+            background: var(--clr-primary);
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .header h2 {
+            font-size: 1.9rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: opacity 0.25s ease;
+        }
+        .header h2:hover {
+            opacity: 0.8;
+        }
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        .notice {
+            background: #ecf0f1;
+            border-left: 4px solid #7f8c8d;
+            padding: 18px 24px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+        .notice strong { font-weight: 600; }
+
+        .content { padding: 40px 40px 60px; }
+        
+        .question-container { 
+            display: none; 
+            animation: fadeIn 0.5s ease-in; 
+        }
+        .question-container.active { display: block; }
+        
+        .question-title { 
+            font-size: 1.6rem; 
+            color: var(--clr-primary); 
+            margin-bottom: 18px; 
+            font-weight: 600;
+        }
+        .question-description { 
+            font-size: 1.05rem; 
+            color: #555; 
+            margin-bottom: 26px; 
+            line-height: 1.7; 
+        }
+        .advice { 
+            background: #e3f2f1; 
+            border-radius: 12px; 
+            padding: 18px 20px; 
+            margin: 18px 0; 
+            color: #0d3b36; 
+        }
+        .advice h4 { 
+            margin: 0 0 10px; 
+            font-weight: 600; 
+            color: var(--clr-accent); 
+        }
+        .button-group { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 14px; 
+            margin-top: 30px;
+        }
+        .btn {
+            flex: 1 1 120px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1.05rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            min-width: 120px;
+        }
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 18px rgba(0,0,0,0.12); 
+        }
+        .btn-yes { background: var(--clr-accent); color: white; }
+        .btn-no { background: var(--clr-warning); color: white; }
+        .btn-gray { background: #9e9e9e; color: white; }
+        .btn-restart { background: #457b9d; color: white; }
+
+        .progress-bar {
+            height: 4px;
+            background: #ecf0f1;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, var(--clr-accent) 0%, #21867a 100%);
+            transition: width 0.3s ease;
+        }
+
+        .final-result {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .final-result h2 {
+            color: #27ae60;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .final-result p {
+            font-size: 1.2em;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .step-indicator {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--clr-primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: auto;
+        }
+
+        .footer a {
+            color: #83c5be;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+    </style>
+</head>
+<body>
+    <!-- Start Page -->
+    <section class="start-screen" id="startScreen">
+        <h1>Preventive Structure Philosophy&nbsp;Framework</h1>
+        <p>
+            This tool provides step-by-step guidance for <strong>"thinking that prevents risks in advance"</strong><br>
+            and supports your long-term perspective as a tangible, interactive philosophy.<br><br>
+            Please note that the steps and criteria presented here are merely <strong>examples</strong>.<br>
+            Feel free to add, remove, or modify them according to your purpose and situation to adapt them to your specifications.
+        </p>
+        <button class="btn-main" onclick="startApp()">Start the Steps</button>
+    </section>
+
+    <!-- Main App -->
+    <div class="container" id="appContainer">
+        <div class="header">
+            <h2 onclick="reloadApp()">Preventive Structure Philosophy – Judgment Criteria Framework</h2>
+            <p>A system that emphasizes your reason, ethics, and long-term perspective to prevent risks</p>
+        </div>
+
+        <div class="notice">
+            <strong>⚠ This framework is a template.</strong><br>
+            Please <u>add, delete, and edit steps</u> to suit your context and values.
+            <br>Modifications are <strong>free</strong> within the scope of the MIT license.
+        </div>
+
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="step-indicator" id="stepIndicator">Step 1 / 11</div>
+
+            <!-- Question 1: Reason Check -->
+            <div class="question-container active" id="q1">
+                <div class="question-title">Are you maintaining your reason?</div>
+                <div class="question-description">
+                    Are you trying to make important decisions while fatigued, stressed, or in an emotional state?<br>
+                    Are you in a state where you can make calm and objective judgments?
+                </div>
+                <div class="advice">
+                    <h4>If NO, recommended actions:</h4>
+                    We recommend eating, sleeping, and resting. Also, taking time and distance is important.
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(1, 'no')">NO - Not rational</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(1, 'yes')">YES - Can judge calmly</button>
+                </div>
+            </div>
+
+            <!-- Question 2: Ethics Check -->
+            <div class="question-container" id="q2">
+                <div class="question-title">Is it ethical?</div>
+                <div class="question-description">
+                    Is the action or judgment you are considering morally correct?<br>
+                    Are there any problems such as harming the public?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(2, 'no')">NO - Not ethical</button>
+                    <button class="btn btn-gray" onclick="handleAnswer(2, 'gray')">Gray - Difficult to judge</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(2, 'yes')">YES - Ethical</button>
+                </div>
+            </div>
+
+            <!-- Question 3: Universality Check -->
+            <div class="question-container" id="q3">
+                <div class="question-title">Is that ethics local or universal?</div>
+                <div class="question-description">
+                    Are your judgment criteria not limited to a specific culture or era?<br>
+                    For example, is there a balance between deontological ethics (rule-focused) and utilitarian ethics (result-focused)?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(3, 'no')">NO - Local standards</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(3, 'yes')">YES - Universal</button>
+                </div>
+            </div>
+
+            <!-- Question 4: Ideals and Reality -->
+            <div class="question-container" id="q4">
+                <div class="question-title">Is it something that should be done ideally, even if currently impossible?</div>
+                <div class="question-description">
+                    Even if it's difficult to realize, is it something of value that should ideally be executed?<br>
+                    Or is it something that is impossible and "should not be done"?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(4, 'no')">NO - Should not be done</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(4, 'yes')">YES - Ideally should be done</button>
+                </div>
+            </div>
+
+            <!-- Question 5: Understanding Cognitive Limitations -->
+            <div class="question-container" id="q5">
+                <div class="question-title">Do you understand the cognitive limitations we have as humans and their impact?</div>
+                <div class="question-description">
+                    Human cognition has limitations such as biases, assumptions, and information constraints.<br>
+                    Do you understand these and take them into consideration when making decisions?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(5, 'no')">NO - Do not understand</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(5, 'yes')">YES - Understand</button>
+                </div>
+            </div>
+
+            <!-- Question 6: Strategic Thinking -->
+            <div class="question-container" id="q6">
+                <div class="question-title">Are you avoiding "fights" you cannot win?</div>
+                <div class="question-description">
+                    Are you trying to engage in battles with no chance of winning?<br>
+                    Like Sun Tzu's Art of War, are you strategically choosing situations where you can win?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(6, 'no')">NO - Engaging in reckless battles</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(6, 'yes')">YES - Acting strategically</button>
+                </div>
+            </div>
+
+            <!-- Question 7: Post-Victory Consideration -->
+            <div class="question-container" id="q7">
+                <div class="question-title">After winning, have you avoided "winning too much" and cornering your opponent?</div>
+                <div class="question-description">
+                    Victory is important, but completely cornering your opponent can invite dangerous retaliation.<br>
+                    Are you not creating a situation like "a cornered rat will bite a cat" by hurting your opponent's face or position?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(7, 'no')">NO - Cornering the opponent</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(7, 'yes')">YES - Being considerate</button>
+                </div>
+            </div>
+
+            <!-- Question 8: Balance of Action and Observation -->
+            <div class="question-container" id="q8">
+                <div class="question-title">Can you distinguish between doing nothing and observing quietly versus missing opportunities?</div>
+                <div class="question-description">
+                    Can you appropriately judge when to act and when to wait?<br>
+                    Can you avoid bureaucratization due to the purpose becoming the means, or action paralysis?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(8, 'no')">NO - Cannot distinguish</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(8, 'yes')">YES - Can judge appropriately</button>
+                </div>
+            </div>
+
+            <!-- Question 9: Historical Judgment -->
+            <div class="question-container" id="q9">
+                <div class="question-title">Are you prepared for historical judgment by intelligent life forms 100 years in the future?</div>
+                <div class="question-description">
+                    Are you considering how your actions will be evaluated by advanced intelligence in the future?<br>
+                    Do you understand that ethics may become stricter as civilization advances?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(9, 'no')">NO - Not considering</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(9, 'yes')">YES - Prepared</button>
+                </div>
+            </div>
+
+            <!-- Question 10: Public Contribution -->
+            <div class="question-container" id="q10">
+                <div class="question-title">Can you contribute to the public and humanity?</div>
+                <div class="question-description">
+                    Is your action valuable for society as a whole and humanity?<br>
+                    Does it constitute a contribution beyond personal gain?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(10, 'no')">NO - Cannot contribute</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(10, 'yes')">YES - Can contribute</button>
+                </div>
+            </div>
+
+            <!-- Question 11: Inheritability -->
+            <div class="question-container" id="q11">
+                <div class="question-title">Can you structure it and entrust it to another person?</div>
+                <div class="question-description">
+                    Is your work in a form that others can inherit and develop further?<br>
+                    Is it systematized rather than dependent on an individual?
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-no" onclick="handleAnswer(11, 'no')">NO - Individual dependent</button>
+                    <button class="btn btn-yes" onclick="handleAnswer(11, 'yes')">YES - Already structured</button>
+                </div>
+            </div>
+
+            <!-- Final Result -->
+            <div class="question-container" id="result">
+                <div class="final-result">
+                    <h2>✓ Framework Complete</h2>
+                    <p>
+                        You have completed all steps of the Preventive Structure Philosophy.<br>
+                        May your choices and decisions be rational and ethical judgments<br>
+                        that consider long-term perspectives and contributions to the public!
+                    </p>
+                    <p><strong>Next challenge: Work on solving another problem</strong></p>
+                    <button class="btn btn-restart" onclick="restart()">Start over from the beginning</button>
+                </div>
+            </div>
+
+            <!-- For premature termination -->
+            <div class="question-container" id="stop">
+                <div class="final-result">
+                    <h2>⏸️ Pause</h2>
+                    <p id="stopMessage"></p>
+                    <button class="btn btn-restart" onclick="restart()">Start over from the beginning</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2025 <a href="https://github.com/trgr-karasutoragara/zen-structure-4-u/tree/main/framework" target="_blank">Trgr KarasuToragara</a>. All rights reserved.
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 11;
+
+        // Transition from start screen to main app
+        function startApp() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('appContainer').style.display = 'block';
+            updateProgress();
+        }
+
+        // Reload on title click
+        function reloadApp() {
+            location.reload();
+        }
+
+        function updateProgress() {
+            const progressFill = document.getElementById('progressFill');
+            const stepIndicator = document.getElementById('stepIndicator');
+            const progress = (currentStep / totalSteps) * 100;
+            
+            progressFill.style.width = progress + '%';
+            stepIndicator.textContent = `Step ${currentStep} / ${totalSteps}`;
+        }
+
+        function hideAllQuestions() {
+            const questions = document.querySelectorAll('.question-container');
+            questions.forEach(q => q.classList.remove('active'));
+        }
+
+        function showQuestion(stepNumber) {
+            hideAllQuestions();
+            document.getElementById(`q${stepNumber}`).classList.add('active');
+            updateProgress();
+        }
+
+        function showResult() {
+            hideAllQuestions();
+            document.getElementById('result').classList.add('active');
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('stepIndicator').textContent = 'Complete!';
+        }
+
+        function showStop(message) {
+            hideAllQuestions();
+            document.getElementById('stopMessage').textContent = message;
+            document.getElementById('stop').classList.add('active');
+        }
+
+        function handleAnswer(step, answer) {
+            if (answer === 'no') {
+                // Stop if NO
+                const messages = {
+                    1: 'Good judgment cannot be made in a state of fatigue or emotional distress. Why not take a rest and try again?',
+                    2: 'We recommend avoiding unethical actions. Would you consider other methods?',
+                    3: 'We recommend considering more universal ethical standards.',
+                    4: 'What is impossible and should not be done is futile labor. Would you consider a different approach?',
+                    5: 'Why not start by understanding the limitations of cognition?',
+                    6: 'Acquiring strategic thinking should give you an advantage. Would you learn from the classics?',
+                    7: 'You may lack consideration after victory. Would you reconsider the balance?',
+                    8: 'Cultivating a sense of balance between action and observation is important.',
+                    9: 'Having a long-term, historical perspective will improve your outlook.',
+                    10: 'Since you have already considered reason and ethics in the previous questions, why not take action toward realization?',
+                    11: 'As an example, open sourcing and structuring might be helpful references.'
+                };
+                showStop(messages[step]);
+                return;
+            }
+
+            if (answer === 'gray' && step === 2) {
+                // For gray zone, additional confirmation in next step
+                showStop('Do you understand that this may become problematic in the future? Gray zones require careful consideration.');
+                return;
+            }
+
+            // If YES, go to next step
+            currentStep++;
+            if (currentStep <= totalSteps) {
+                showQuestion(currentStep);
+            } else {
+                // All steps completed
+                showResult();
+            }
+        }
+
+        function restart() {
+            currentStep = 1;
+            showQuestion(1);
+        }
+    </script>
+</body>
+</html>
