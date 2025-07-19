@@ -17,13 +17,11 @@ However, by modifying this HTML file to create your own framework, you can assis
 <br>
 
 # Demo
-## Demo of the Preventive Structure Philosophy – Judgment Criteria
-Framework on Pixel 7a
+## Demo of the Preventive Structure Philosophy – Judgment Criteria Framework on Pixel 7a
 
 https://youtube.com/shorts/f8EuyofxsSo
 
-## Demo of the Preventive Structure Philosophy – Judgment Criteria
-Framework on Ubuntu
+## Demo of the Preventive Structure Philosophy – Judgment Criteria Framework on Ubuntu
 
 https://youtu.be/4BOf1pGQntc
 
