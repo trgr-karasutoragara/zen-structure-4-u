@@ -1,6 +1,9 @@
-[![License: MIT](https://img.shields.io/github/license/yourname/zen-structure-4-u)](LICENSE) 
-[![GitHub Stars](https://img.shields.io/github/stars/yourname/zen-structure-4-u?style=social)](https://github.com/yourname/zen-structure-4-u/stargazers) 
-[![Release](https://img.shields.io/github/v/release/yourname/zen-structure-4-u)](https://github.com/yourname/zen-structure-4-u/releases) 
+[![License: MIT](https://img.shields.io/github/license/trgr-karasutoragara/zen-structure-4-u)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/trgr-karasutoragara/zen-structure-4-u?style=social)](https://github.com/trgr-karasutoragara/zen-structure-4-u/stargazers)
+![Last Commit](https://img.shields.io/github/last-commit/trgr-karasutoragara/zen-structure-4-u)
+
+
+<br>
 
 # What is this?
 **The Preventive Structure Philosophy Framework** can be freely modified within the scope of the MIT License to create your own personalized framework.
