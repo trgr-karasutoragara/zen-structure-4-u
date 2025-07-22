@@ -9,9 +9,9 @@
 
 <br>
 
-**English version** → https://github.com/trgr-karasutoragara/zen-structure-4-u/blob/main/framework/v1-en.html
+**English version** → https://trgr-karasutoragara.github.io/zen-structure-4-u/framework/v1-en.html
 
-**Japanese version** → https://github.com/trgr-karasutoragara/zen-structure-4-u/blob/main/framework/v1-jp.html
+**Japanese version** → https://trgr-karasutoragara.github.io/zen-structure-4-u/framework/v1-jp.html
 
 <br>
 
