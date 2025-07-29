@@ -43,7 +43,7 @@ MIT License
 
 <br>
 
-## Repository Policy
+# Repository Policy
 
 - I develop prototypes with a focus on ethics.
 - There are no plans for maintenance or support.
